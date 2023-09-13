@@ -2,6 +2,9 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
+import userRoutes from "./routes/user";
+import authRoutes from "./routes/auth";
+
 const app: Express = express();
 dotenv.config();
 
@@ -16,7 +19,15 @@ const connect = () => {
     });
 };
 
-app.listen(8000, () => {
+app.use(express.json());
+
+/** api routes */
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+
+app.listen(process.env.PORT, () => {
   connect();
-  console.log(`⚡️[server]: Server is running at http://localhost:${8000}`);
+  console.log(
+    `⚡️[server]: Server is running at http://localhost:${process.env.PORT}`
+  );
 });
