@@ -2,21 +2,54 @@ import React from "react";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 import "./App.css";
+import Home from "./pages/Home/Home";
+import Profile from "./pages/Profile/Profile";
+import Explore from "./pages/Explore/Explore";
+import Signin from "./pages/Signin/Signin";
+import Navbar from "./components/Navbar/Navbar";
 
 const Layout = () => {
   return (
-    <div>
-      <h1>navbar</h1>
+    <div className="md:w-8/12 mx-auto">
+      <Navbar />
       <Outlet></Outlet>
     </div>
   );
 };
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/profile/:id",
+        element: <Profile />,
+      },
+      {
+        path: "/explore",
+        element: <Explore />,
+      },
+      {
+        path: "/signin",
+        element: <Signin />,
+      },
+      {
+        path: "/signout",
+        element: <Signin />,
+      },
+    ],
+  },
+]);
+
 function App() {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline bg-amber-300">
-        Hello world!
-      </h1>
+      <RouterProvider router={router}></RouterProvider>
     </div>
   );
 }
