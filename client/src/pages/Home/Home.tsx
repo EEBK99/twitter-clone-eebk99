@@ -2,6 +2,7 @@ import React from "react";
 
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 import RightSidebar from "../../components/RightSidebar/RightSidebar";
+import MainTweet from "../../components/MainTweet/MainTweet";
 
 type Props = {};
 
@@ -12,7 +13,7 @@ const Home = (props: Props) => {
         <LeftSidebar />
       </div>
       <div className="col-span-2 border-x-2 border-t-slate-800 px-6">
-        Main tweet goes here
+        <MainTweet />
       </div>
       <div className="px-6">
         <RightSidebar />
