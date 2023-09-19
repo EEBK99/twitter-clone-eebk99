@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 import userRoutes from "./routes/user";
 import authRoutes from "./routes/auth";
+import tweetRoutes from "./routes/tweet";
 
 const app: Express = express();
 dotenv.config();
@@ -24,8 +25,9 @@ app.use(cookieParser());
 app.use(express.json());
 
 /** api routes */
-app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/tweets", tweetRoutes);
 
 app.listen(process.env.PORT, () => {
   connect();

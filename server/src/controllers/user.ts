@@ -1,5 +1,6 @@
 import { handleError } from "../helpers/error";
 import User from "../models/user";
+import Tweet from "../models/tweet";
 
 /**
  * create new user
@@ -65,13 +66,16 @@ export const deleteUser = async (
   if (req.params.id === req.user.id) {
     try {
       await User.findByIdAndDelete(req.params.id);
+      await Tweet.deleteMany({
+        userId: req.params.id,
+      });
 
       res.status(200).json("User deleted");
     } catch (err) {
       next(err);
     }
   } else {
-    return next(handleError("403", "You can only update your own account"));
+    return next(handleError("403", "You can only delete your own account"));
   }
 };
 
