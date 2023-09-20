@@ -1,4 +1,5 @@
 import React from "react";
+import TimelineTweets from "../TimelineTweets/TimelineTweets";
 
 type Props = {};
 
@@ -17,7 +18,7 @@ const MainTweet = (props: Props) => {
           Tweet
         </button>
       </form>
-      MainTweet
+      <TimelineTweets />
     </div>
   );
 };
