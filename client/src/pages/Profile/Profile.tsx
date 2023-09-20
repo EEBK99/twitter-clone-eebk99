@@ -13,7 +13,7 @@ type Props = {};
 const Profile = (props: Props) => {
   const [open, setOpen] = useState(false);
   const [userTweets, setUserTweets] = useState<any[]>([]);
-  const [userProfile, setUserProfile] = useState();
+  const [userProfile, setUserProfile] = useState<any>();
 
   const { currentUser } = useSelector((state: any) => state.user);
 
@@ -36,6 +36,8 @@ const Profile = (props: Props) => {
     fetchData();
   }, [currentUser, id]);
 
+  console.log("userProfile", userProfile);
+
   return (
     <>
       <div className="grid grid-cols-1 md:grid-cols-4">
@@ -45,7 +47,11 @@ const Profile = (props: Props) => {
 
         <div className="col-span-2 border-x-2 border-t-slate-800 px-6">
           <div className="flex justify-between items-center">
-            {/* <img src="" alt="" /> */}
+            <img
+              src={userProfile?.profilePicture}
+              alt="Profile"
+              className="w-12 h-12 rounded-full bg-slate-300"
+            />
             {currentUser._id === id ? (
               <button
                 onClick={() => setOpen(true)}

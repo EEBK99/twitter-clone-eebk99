@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface UserState {
-  currentUser: {} | null;
+  currentUser: any;
   isLoading: boolean;
   error: boolean;
 }
@@ -31,10 +31,13 @@ export const userSlice = createSlice({
     logout: (state) => {
       return initialState;
     },
+    changeProfile: (state, action) => {
+      state.currentUser.profilePicture = action.payload;
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailed, logout } =
+export const { loginStart, loginSuccess, loginFailed, logout, changeProfile } =
   userSlice.actions;
 
 export default userSlice.reducer;
