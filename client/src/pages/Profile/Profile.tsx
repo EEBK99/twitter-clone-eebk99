@@ -7,6 +7,7 @@ import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
 import RightSidebar from "../../components/RightSidebar/RightSidebar";
 import Tweet from "../../components/Tweet/Tweet";
 import EditProfile from "../../components/EditProfile/EditProfile";
+import { following } from "../../store/slices/userSlice";
 
 type Props = {};
 
@@ -36,7 +37,27 @@ const Profile = (props: Props) => {
     fetchData();
   }, [currentUser, id]);
 
-  console.log("userProfile", userProfile);
+  const handleFollowUnFollow = async () => {
+    if (!currentUser.following.includes(id)) {
+      try {
+        const follow = await axios.put(`/users/follow/${id}`, {
+          id: currentUser._id,
+        });
+        dispatch(following(id));
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        const unfollow = await axios.put(`/users/unfollow/${id}`, {
+          id: currentUser._id,
+        });
+        dispatch(following(id));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   return (
     <>
@@ -60,11 +81,17 @@ const Profile = (props: Props) => {
                 Edit Profile
               </button>
             ) : currentUser.following.includes(id) ? (
-              <button className="px-4 -y-2 bg-blue-500 rounded-full text-white">
+              <button
+                onClick={handleFollowUnFollow}
+                className="px-4 -y-2 bg-blue-500 rounded-full text-white"
+              >
                 Following
               </button>
             ) : (
-              <button className="px-4 -y-2 bg-blue-500 rounded-full text-white">
+              <button
+                onClick={handleFollowUnFollow}
+                className="px-4 -y-2 bg-blue-500 rounded-full text-white"
+              >
                 Follow
               </button>
             )}
