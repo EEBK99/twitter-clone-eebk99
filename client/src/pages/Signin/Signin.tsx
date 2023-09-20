@@ -1,20 +1,49 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailed,
+} from "../../store/slices/userSlice";
 
 type Props = {};
 
 const Signin = (props: Props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
-  const handleLogin = async (e: { preventDefault: () => void }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSignin = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-
+    dispatch(loginStart());
     try {
       const res = await axios.post("/auth/signin", { username, password });
-      console.log("login res", res, res.data);
+      dispatch(loginSuccess(res.data));
+      navigate("/");
     } catch (err) {
-      console.log("login err", err);
+      dispatch(loginFailed());
+    }
+  };
+
+  const handleSignup = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    dispatch(loginStart());
+    try {
+      const res = await axios.post("/auth/signup", {
+        username,
+        email,
+        password,
+      });
+      dispatch(loginSuccess(res.data));
+      navigate("/");
+    } catch (err) {
+      dispatch(loginFailed());
     }
   };
 
@@ -35,8 +64,7 @@ const Signin = (props: Props) => {
         className="text-xl py-2 rounded-full px-4"
       />
       <button
-        type="button"
-        onClick={handleLogin}
+        onClick={handleSignin}
         className="text-xl py-2 rounded-full px-4 bg-blue-500 text-white"
       >
         Sign in
@@ -44,22 +72,26 @@ const Signin = (props: Props) => {
 
       <p className="text-center text-xl">Don't have a account?</p>
       <input
+        onChange={(e) => setUsername(e.target.value)}
         type="text"
         placeholder="username"
         className="text-xl py-2 rounded-full px-4"
       />
       <input
+        onChange={(e) => setEmail(e.target.value)}
         type="email"
         placeholder="email"
-        // required
+        required
         className="text-xl py-2 rounded-full px-4"
       />
       <input
+        onChange={(e) => setPassword(e.target.value)}
         type="password"
         placeholder="password"
         className="text-xl py-2 rounded-full px-4"
       />
       <button
+        onClick={handleSignup}
         className="text-xl py-2 rounded-full px-4 bg-blue-500 text-white"
         type="submit"
       >
