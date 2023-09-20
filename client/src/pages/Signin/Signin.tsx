@@ -35,7 +35,8 @@ const Signin = (props: Props) => {
         className="text-xl py-2 rounded-full px-4"
       />
       <button
-        onClick={() => handleLogin}
+        type="button"
+        onClick={handleLogin}
         className="text-xl py-2 rounded-full px-4 bg-blue-500 text-white"
       >
         Sign in
