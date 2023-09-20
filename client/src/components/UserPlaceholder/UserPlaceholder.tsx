@@ -19,8 +19,8 @@ const UserPlaceholder: FC<UserPlaceholderProps> = ({
       try {
         const userProfile = await axios.get(`/users/find/${id}`);
         setUserData(userProfile.data);
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.log(err);
       }
     };
     fetchData();

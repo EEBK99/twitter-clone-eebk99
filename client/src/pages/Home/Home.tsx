@@ -10,7 +10,6 @@ type Props = {};
 
 const Home = (props: Props) => {
   const { currentUser } = useSelector((state: any) => state.user);
-  console.log(currentUser);
   return (
     <>
       {!currentUser ? (
