@@ -38,7 +38,7 @@ const Profile = (props: Props) => {
   }, [currentUser, id]);
 
   const handleFollowUnFollow = async () => {
-    if (!currentUser?.following?.includes(id)) {
+    if (!currentUser?.followings?.includes(id)) {
       try {
         const follow = await axios.put(`/users/follow/${id}`, {
           id: currentUser._id,
@@ -80,7 +80,7 @@ const Profile = (props: Props) => {
               >
                 Edit Profile
               </button>
-            ) : currentUser?.following?.includes(id) ? (
+            ) : currentUser?.followings?.includes(id) ? (
               <button
                 onClick={handleFollowUnFollow}
                 className="px-4 -y-2 bg-blue-500 rounded-full text-white"
