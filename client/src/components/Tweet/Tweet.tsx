@@ -49,10 +49,10 @@ const Tweet: FC<TweetProps> = ({ tweet, setData }): JSX.Element => {
         id: currentUser._id,
       });
 
-      if (location.includes("profile")) {
+      if (location?.includes("profile")) {
         const newData = await axios.get(`/tweets/user/all/${id}`);
         setData(newData.data);
-      } else if (location.includes("explore")) {
+      } else if (location?.includes("explore")) {
         const newData = await axios.get(`/tweets/explore`);
         setData(newData.data);
       } else {
@@ -66,8 +66,12 @@ const Tweet: FC<TweetProps> = ({ tweet, setData }): JSX.Element => {
     <div>
       {userData && (
         <>
-          <div className="flex space-x-2">
-            {/* <img src=""></img> */}
+          <div className="flex space-x-3">
+            <img
+              src={userData?.profilePicture}
+              alt={userData.username}
+              className="w-12 h-12 rounded-full bg-slate-300"
+            />
             <Link to={`/profile/${userData?._id}`}>
               <h3>{userData.username}</h3>
             </Link>
@@ -76,16 +80,18 @@ const Tweet: FC<TweetProps> = ({ tweet, setData }): JSX.Element => {
             <p> - {dateStr}</p>
           </div>
 
-          <p>{tweet.description}</p>
+          <p className="mt-2">{tweet.description}</p>
 
-          <button onClick={handleLike}>
-            {tweet.likes.includes(currentUser._id) ? (
-              <FavoriteIcon className="mr-2 my-2 cursor-pointer" />
-            ) : (
-              <FavoriteBorderIcon className="mr-2 my-2 cursor-pointer" />
-            )}
-            {tweet.likes.length}
-          </button>
+          <div className="mb-4">
+            <button onClick={handleLike}>
+              {tweet.likes.includes(currentUser._id) ? (
+                <FavoriteIcon className="mr-2 my-2 cursor-pointer" />
+              ) : (
+                <FavoriteBorderIcon className="mr-2 my-2 cursor-pointer" />
+              )}
+              {tweet.likes.length}
+            </button>
+          </div>
         </>
       )}
     </div>
