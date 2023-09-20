@@ -1,23 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 type Props = {};
 
 const Signin = (props: Props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post("/auth/signin", { username, password });
+      console.log("login res", res, res.data);
+    } catch (err) {
+      console.log("login err", err);
+    }
+  };
+
   return (
     <form className="bg-gray-200 flex flex-col py-12 px-8 rounded-lg w-8/12 md:w-6/12 mx-auto gap-10">
       <h2 className="text-3xl font-bold text-center">Sign in twitter</h2>
 
       <input
+        onChange={(e) => setUsername(e.target.value)}
         type="text"
         placeholder="username"
         className="text-xl py-2 rounded-full px-4"
       />
       <input
+        onChange={(e) => setPassword(e.target.value)}
         type="password"
         placeholder="password"
         className="text-xl py-2 rounded-full px-4"
       />
-      <button className="text-xl py-2 rounded-full px-4 bg-blue-500 text-white">
+      <button
+        onClick={() => handleLogin}
+        className="text-xl py-2 rounded-full px-4 bg-blue-500 text-white"
+      >
         Sign in
       </button>
 
@@ -30,7 +50,7 @@ const Signin = (props: Props) => {
       <input
         type="email"
         placeholder="email"
-        required
+        // required
         className="text-xl py-2 rounded-full px-4"
       />
       <input
