@@ -17,7 +17,9 @@ const UserPlaceholder: FC<UserPlaceholderProps> = ({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userProfile = await axios.get(`/users/find/${id}`);
+        const userProfile = await axios.get(
+          `${process.env.REACT_APP_BACKEND_API_URL}/users/find/${id}`
+        );
         setUserData(userProfile.data);
       } catch (err) {
         console.log(err);

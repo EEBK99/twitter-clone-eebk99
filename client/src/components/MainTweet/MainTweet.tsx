@@ -13,10 +13,13 @@ const MainTweet = (props: Props) => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     try {
-      const submitTweet = await axios.post("/tweets", {
-        userId: currentUser._id,
-        description: tweetText,
-      });
+      const submitTweet = await axios.post(
+        `${process.env.REACT_APP_BACKEND_API_URL}/tweets`,
+        {
+          userId: currentUser._id,
+          description: tweetText,
+        }
+      );
       window.location.reload();
     } catch (error) {
       console.log("error", error);

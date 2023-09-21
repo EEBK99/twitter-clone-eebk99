@@ -23,7 +23,10 @@ const Signin = (props: Props) => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post("/auth/signin", { username, password });
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_API_URL}/auth/signin`,
+        { username, password }
+      );
       dispatch(loginSuccess(res.data));
       navigate("/");
     } catch (err) {
@@ -35,11 +38,14 @@ const Signin = (props: Props) => {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const res = await axios.post("/auth/signup", {
-        username,
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_API_URL}/auth/signup`,
+        {
+          username,
+          email,
+          password,
+        }
+      );
       dispatch(loginSuccess(res.data));
       navigate("/");
     } catch (err) {

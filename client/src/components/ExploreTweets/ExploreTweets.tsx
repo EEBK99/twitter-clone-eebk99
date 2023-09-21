@@ -13,7 +13,9 @@ const ExploreTweets = (props: Props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const exploreTweets = await axios.get("/tweets/explore");
+        const exploreTweets = await axios.get(
+          `${process.env.REACT_APP_BACKEND_API_URL}/tweets/explore`
+        );
         setExplore(exploreTweets.data);
       } catch (err) {
         console.log("error", err);

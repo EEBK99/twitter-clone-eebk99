@@ -24,8 +24,12 @@ const Profile = (props: Props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userTweets = await axios.get(`/tweets/user/all/${id}`);
-        const userProfile = await axios.get(`/users/find/${id}`);
+        const userTweets = await axios.get(
+          `${process.env.REACT_APP_BACKEND_API_URL}/tweets/user/all/${id}`
+        );
+        const userProfile = await axios.get(
+          `${process.env.REACT_APP_BACKEND_API_URL}/users/find/${id}`
+        );
 
         setUserTweets(userTweets.data);
         setUserProfile(userProfile.data);
@@ -40,18 +44,24 @@ const Profile = (props: Props) => {
   const handleFollowUnFollow = async () => {
     if (!currentUser?.followings?.includes(id)) {
       try {
-        const follow = await axios.put(`/users/follow/${id}`, {
-          id: currentUser._id,
-        });
+        const follow = await axios.put(
+          `${process.env.REACT_APP_BACKEND_API_URL}/users/follow/${id}`,
+          {
+            id: currentUser._id,
+          }
+        );
         dispatch(following(id));
       } catch (error) {
         console.log(error);
       }
     } else {
       try {
-        const unfollow = await axios.put(`/users/unfollow/${id}`, {
-          id: currentUser._id,
-        });
+        const unfollow = await axios.put(
+          `${process.env.REACT_APP_BACKEND_API_URL}/users/unfollow/${id}`,
+          {
+            id: currentUser._id,
+          }
+        );
         dispatch(following(id));
       } catch (error) {
         console.log(error);
