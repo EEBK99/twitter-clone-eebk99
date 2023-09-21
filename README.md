@@ -1,4 +1,4 @@
-# Twitter clone MERN by @EEBK99
+# Twitter Clone - MERN by @EEBK99
 
 ### Completed Task Overview
 
