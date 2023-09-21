@@ -12,7 +12,7 @@ dotenv.config();
 
 const connect = () => {
   mongoose
-    .connect(process.env.MONGODB_URL || "8000")
+    .connect(process.env.MONGODB_URL || "")
     .then(() => {
       console.log("connected to mongodb database");
     })
@@ -29,7 +29,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/tweets", tweetRoutes);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 8000, () => {
   connect();
   console.log(
     `⚡️[server]: Server is running at http://localhost:${process.env.PORT}`
