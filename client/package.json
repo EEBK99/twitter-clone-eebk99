@@ -54,5 +54,5 @@
   "devDependencies": {
     "tailwindcss": "^3.3.3"
   },
-  "proxy": "http://localhost:8000/api"
+  "proxy": "https://ec2-16-171-136-34.eu-north-1.compute.amazonaws.com/haseeb/api"
 }
