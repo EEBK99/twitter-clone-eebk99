@@ -1,5 +1,11 @@
 # Twitter Clone - MERN by @EEBK99
 
+## Snippets
+
+![Demo1](https://github.com/EEBK99/twitter-clone-eebk99/blob/master/client/public/Images/1.png)
+
+![Demo2](https://github.com/EEBK99/twitter-clone-eebk99/blob/master/client/public/Images/2.png)
+
 ### Completed Task Overview
 
 User can :
